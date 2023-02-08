@@ -9,12 +9,13 @@ function getTimeOfDay() {
   if (hours >= 12 && hours <= 17) timesOfDay = 'afternoon';
   if (hours >= 18 && hours <= 23) timesOfDay = 'evening';
   if (hours >= 00 && hours <= 5) timesOfDay = 'night';
-  setTimeout(getTimeOfDay, 1000);
 }
 
 // приветствие
 function showGreeting() {
   greeting.innerHTML = `Good ${timesOfDay}`;
+  getTimeOfDay();
+  setTimeout(showGreeting, 1000);
 }
 getTimeOfDay();
 showGreeting();
@@ -41,12 +42,13 @@ function turnsNumber() {
 }
 
 let block = document.querySelector('.body');
+const img = new Image();
 function changeBgImg() {
-  const img = new Image();
   img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
   img.onload = () => {
     block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
   };
+  setTimeout(changeBgImg, 1000);
 }
 
 turnsNumber();
@@ -75,7 +77,10 @@ slideNext.addEventListener('click', function getSlideNext(e) {
     pic = turnsNumberString(getRandomNum);
   }
 
-  block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
+  img.onload = () => {
+    block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+  };
 });
 
 // левая стрелочкаа
@@ -90,5 +95,8 @@ slidePrev.addEventListener('click', function getSlidePrev(e) {
     pic = turnsNumberString(getRandomNum);
   }
 
-  block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
+  img.onload = () => {
+    block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+  };
 });
