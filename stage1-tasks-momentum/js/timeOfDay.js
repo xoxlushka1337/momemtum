@@ -48,7 +48,6 @@ function changeBgImg() {
   img.onload = () => {
     block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
   };
-  setTimeout(changeBgImg, 1000);
 }
 
 turnsNumber();
