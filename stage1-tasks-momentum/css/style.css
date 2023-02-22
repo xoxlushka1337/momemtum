@@ -8,7 +8,11 @@
   margin: 0;
   padding: 0;
 }
-
+.display {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s, opacity 0.5s;
+}
 .body {
   min-width: 480px;
   min-height: 100vh;
@@ -121,7 +125,7 @@
 
 .player::before {
   content: '';
-  position: absolute; /* Абсолютное позиционирование */
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -163,6 +167,11 @@
   display: flex;
   margin: 0 auto;
   cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0.5s, opacity 0.5s;
+  /* visibility: visible;
+  transition: 0.55s opacity, 0.55s visibility; */
 }
 .player-progress {
   background: #2b3c5b;
@@ -190,7 +199,7 @@
   margin-top: 4px;
   opacity: 1;
 }
-.switch {
+.switch-activ {
   opacity: 0.4;
 }
 input[type='range'] {
@@ -232,6 +241,172 @@ input[type='range']::-moz-range-thumb {
   box-shadow: -200px 0px 0px 200px #2b3c5b;
   padding: 0px;
   margin: 0px;
+}
+
+/* Настройки */
+ul {
+  list-style-type: none;
+}
+
+.setting-conteiner {
+  position: relative;
+}
+.settings-img {
+  display: flex;
+  margin-top: 20px;
+  width: 40px;
+  height: 40px;
+  background: url(/stage1-tasks-momentum/assets/img/settings.png);
+  background-size: cover;
+  background-position: center;
+  filter: invert(1);
+  opacity: 0.6;
+  cursor: pointer;
+}
+.settings-img:hover {
+  transform: rotate(360deg); /*поворачивается на 360 градусов вправо (если надо влево, то -360)*/
+  transition: 3s;
+}
+.settings {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  width: 0;
+  height: 0;
+  padding-top: 20px;
+  color: rgb(180, 180, 180);
+  transform: translateY(-100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity 0.2s, translateY 0.2s;
+}
+.settings-activ {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+  width: 448px;
+  height: 160px;
+}
+.option {
+  display: none;
+}
+.settings::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #000000a9;
+  filter: blur(3px);
+  border-radius: 20px;
+}
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+}
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.language-list {
+  text-align: center;
+}
+/* .slider-list {
+  text-align: center;
+} */
+.li-API {
+  display: flex;
+  justify-content: space-between;
+}
+
+.API-input {
+  width: 68px;
+  height: 16px;
+  margin-left: 7px;
+  background-color: #2195f375;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  padding-left: 2px;
+}
+.li {
+  padding-bottom: 5px;
+}
+.settings-li-active {
+  font-size: 19px;
+  color: #fff;
+}
+
+/* вкл/выкл */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 12px;
+  margin-left: 10px;
+  align-self: center;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 0px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.lange {
+  margin-top: 20px;
+  background-color: #2b3c5b;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .weather {
