@@ -174,10 +174,10 @@ const muteButton = document.querySelector('.mute-button');
 muteButton.addEventListener('click', function () {
   if (!audio.volume == 0) {
     audio.volume = 0;
-    muteButton.classList.add('switch');
+    muteButton.classList.add('switch-activ');
   } else {
     audio.volume = 1;
-    muteButton.classList.remove('switch');
+    muteButton.classList.remove('switch-activ');
   }
 });
 // Ползузнок звука

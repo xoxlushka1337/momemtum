@@ -1,4 +1,9 @@
 const greeting = document.querySelector('.greeting');
+const block = document.querySelector('.body');
+const Unsplash = document.querySelector('.Unsplash');
+const GitHub = document.querySelector('.GitHub');
+const Flickr = document.querySelector('.Flickr');
+let photoProviber = '';
 let timesOfDay = '';
 
 // время суток
@@ -33,7 +38,97 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// рандомное число картинки
+// Github
+
+function getGitHub() {
+  photoProviber = 'GitHub';
+
+  GitHub.classList.add('settings-li-active');
+  Unsplash.classList.remove('settings-li-active');
+  Flickr.classList.remove('settings-li-active');
+  let getRandomNum = Math.floor(Math.random() * 20) + 1;
+  function turnsNumber() {
+    if (getRandomNum < 10) {
+      getRandomNum = `0${getRandomNum}`;
+    }
+  }
+  const img = new Image();
+  function changeBgImg() {
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
+    img.onload = () => {
+      block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
+    };
+  }
+
+  turnsNumber();
+  changeBgImg();
+}
+
+getGitHub();
+GitHub.addEventListener('click', getGitHub);
+
+// клик Unsplash
+Unsplash.addEventListener('click', function () {
+  photoProviber = 'Unsplash';
+
+  Unsplash.classList.add('settings-li-active');
+  GitHub.classList.remove('settings-li-active');
+  Flickr.classList.remove('settings-li-active');
+  const fectchPhotos = async () => {
+    const url = `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    states = data;
+    setPhotos();
+  };
+  // рандомное число
+  let Num = Math.floor(Math.random() * 20) + 1;
+  const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
+  let states = [];
+
+  const img = new Image();
+
+  const setPhotos = () => {
+    block.style.backgroundImage = `url(${states.results[Num].urls.regular})`;
+  };
+  fectchPhotos();
+});
+
+// клик Flickr
+Flickr.addEventListener('click', function () {
+  photoProviber = 'Flickr';
+
+  Flickr.classList.add('settings-li-active');
+  GitHub.classList.remove('settings-li-active');
+  Unsplash.classList.remove('settings-li-active');
+
+  const fectchPhotos = async () => {
+    const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    states = data;
+    setPhotos();
+  };
+  let states = [];
+
+  // рандомное число
+  let Num = Math.floor(Math.random() * 30) + 1;
+
+  const setPhotos = () => {
+    let gp = states.photos.photo[Num];
+    let farmId = gp.farm;
+    let serverId = gp.server;
+    let id = gp.id;
+    let secret = gp.secret;
+    block.style.backgroundImage = `url('https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg')`;
+  };
+  fectchPhotos();
+});
+
+// Рандомный индекс для стрелочки GitHub
+
 let getRandomNum = Math.floor(Math.random() * 20) + 1;
 function turnsNumber() {
   if (getRandomNum < 10) {
@@ -41,61 +136,186 @@ function turnsNumber() {
   }
 }
 
-let block = document.querySelector('.body');
-const img = new Image();
-function changeBgImg() {
-  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
-  img.onload = () => {
-    block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
-  };
-}
+// левая  стрелочка
+const slidePrev = document.querySelector('.slide-prev');
+slidePrev.addEventListener('click', function getSlidePrev() {
+  if (photoProviber === 'Unsplash') {
+    const fectchPhotos = async () => {
+      const url = `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`;
+      const response = await fetch(url);
+      const data = await response.json();
 
-turnsNumber();
-changeBgImg();
+      states = data;
+      setPhotos();
+    };
+    // рандомное число
+    let Num = Math.floor(Math.random() * 20) + 1;
+    const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
+    let states = [];
 
-// строку делаем числом
+    const img = new Image();
 
-function turnsNumberString(number) {
-  let picNum;
-  if (number < 10) {
-    picNum = `0${number}`;
-  } else {
-    picNum = `${number}`;
+    const setPhotos = () => {
+      img.src = `${states.results[Num].urls.regular}`;
+      img.onload = () => {
+        block.style.backgroundImage = `url(${states.results[Num].urls.regular})`;
+      };
+    };
+    fectchPhotos();
+  } else if (photoProviber === 'GitHub') {
+    const img = new Image();
+    function changeBgImg() {
+      img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
+      img.onload = () => {
+        block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
+      };
+    }
+
+    turnsNumber();
+    changeBgImg();
+
+    // строку делаем числом
+    function turnsNumberString(number) {
+      let picNum;
+      if (number < 10) {
+        picNum = `0${number}`;
+      } else {
+        picNum = `${number}`;
+      }
+      return picNum;
+    }
+    let pic;
+    if (getRandomNum < 20) {
+      getRandomNum--;
+      pic = turnsNumberString(getRandomNum);
+    } else {
+      getRandomNum = 20;
+      pic = turnsNumberString(getRandomNum);
+    }
+
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
+    img.onload = () => {
+      block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+    };
+  } else if ((photoProviber = 'Flickr')) {
+    const fectchPhotos = async () => {
+      const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`;
+      const response = await fetch(url);
+      const data = await response.json();
+      states = data;
+
+      setPhotos();
+    };
+    let states = [];
+
+    // рандомное число
+    let Num = Math.floor(Math.random() * 30) + 1;
+
+    const img = new Image();
+
+    const setPhotos = () => {
+      let gp = states.photos.photo[Num];
+      let farmId = gp.farm;
+      let serverId = gp.server;
+      let id = gp.id;
+      let secret = gp.secret;
+      img.src = `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
+      img.onload = () => {
+        block.style.backgroundImage = `url('https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg')`;
+      };
+    };
+    fectchPhotos();
   }
-  return picNum;
-}
-// правая стрелочкаа
-const slideNext = document.querySelector('.slide-next');
-slideNext.addEventListener('click', function getSlideNext(e) {
-  let pic;
-  if (getRandomNum < 20) {
-    getRandomNum++;
-    pic = turnsNumberString(getRandomNum);
-  } else {
-    getRandomNum = 1;
-    pic = turnsNumberString(getRandomNum);
-  }
-
-  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
-  img.onload = () => {
-    block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
-  };
 });
 
-// левая стрелочкаа
-const slidePrev = document.querySelector('.slide-prev');
-slidePrev.addEventListener('click', function getSlidePrev(e) {
-  let pic;
-  if (getRandomNum > 1) {
-    getRandomNum--;
-    pic = turnsNumberString(getRandomNum);
-  } else {
-    getRandomNum = 20;
-    pic = turnsNumberString(getRandomNum);
-  }
+// правоя стрелочка
+const slideNext = document.querySelector('.slide-next');
+slideNext.addEventListener('click', function getSlideNext(e) {
+  if (photoProviber === 'Unsplash') {
+    const fectchPhotos = async () => {
+      const url = `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`;
+      const response = await fetch(url);
+      const data = await response.json();
 
-  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
-  img.onload = () => {
-    block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
-  };
+      states = data;
+      setPhotos();
+    };
+    // рандомное число
+    let Num = Math.floor(Math.random() * 20) + 1;
+    const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
+    let states = [];
+
+    const img = new Image();
+
+    const setPhotos = () => {
+      img.src = `${states.results[Num].urls.regular}`;
+      img.onload = () => {
+        block.style.backgroundImage = `url(${states.results[Num].urls.regular})`;
+      };
+    };
+    fectchPhotos();
+  } else if (photoProviber === 'GitHub') {
+    const img = new Image();
+    function changeBgImg() {
+      img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
+      img.onload = () => {
+        block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
+      };
+    }
+
+    turnsNumber();
+    changeBgImg();
+
+    // строку делаем числом
+    function turnsNumberString(number) {
+      let picNum;
+      if (number < 10) {
+        picNum = `0${number}`;
+      } else {
+        picNum = `${number}`;
+      }
+      return picNum;
+    }
+    let pic;
+    if (getRandomNum < 20) {
+      getRandomNum++;
+      pic = turnsNumberString(getRandomNum);
+    } else {
+      getRandomNum = 1;
+      pic = turnsNumberString(getRandomNum);
+    }
+
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg`;
+    img.onload = () => {
+      block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${pic}.jpg')`;
+    };
+  } else if ((photoProviber = 'Flickr')) {
+    const fectchPhotos = async () => {
+      const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`;
+      const response = await fetch(url);
+      const data = await response.json();
+      states = data;
+
+      setPhotos();
+    };
+    let states = [];
+
+    // рандомное число
+    let Num = Math.floor(Math.random() * 30) + 1;
+
+    const img = new Image();
+
+    const setPhotos = () => {
+      let gp = states.photos.photo[Num];
+      let farmId = gp.farm;
+      let serverId = gp.server;
+      let id = gp.id;
+      let secret = gp.secret;
+      img.src = `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
+      img.onload = () => {
+        block.style.backgroundImage = `url('https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg')`;
+      };
+    };
+    fectchPhotos();
+  }
 });

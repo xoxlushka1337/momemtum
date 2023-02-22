@@ -55,6 +55,80 @@
         </ul>
       </div>
 
+      <!-- <select class="lange">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+      </select> -->
+      <div class="setting-conteiner">
+        <div class="settings-img"></div>
+        <div class="settings">
+          <div class="settings-block">
+            <div class="block">
+              <span class="subtitle">time</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="block">
+              <span class="subtitle">date</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="block">
+              <span class="subtitle">audio</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="block">
+              <span class="subtitle">weather</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="block">
+              <span class="subtitle">quotes</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="block">
+              <span class="subtitle">greeting</span>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="settings-language">
+            <div class="title">Language</div>
+            <ul class="language-list">
+              <li class="li">English</li>
+              <li class="li">Russian</li>
+            </ul>
+          </div>
+          <div class="settings-slider">
+            <div class="title">Photo slider</div>
+            <ul class="slider-list">
+              <li class="li GitHub">GitHub</li>
+              <div class="li-API">
+                <li class="li Unsplash">Unsplash</li>
+                <input type="password text" class="API-input" placeholder="image tag" />
+              </div>
+              <div class="li-API">
+                <li class="li Flickr">Flickr</li>
+                <input type="password text" class="API-input" placeholder="image tag" />
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="weather">
         <input type="password text" class="city" value="Минск" />
         <i class="weather-icon owf"></i>
@@ -63,8 +137,8 @@
           <span class="temperature"></span>
           <span class="weather-description"></span>
         </div>
-        <div class="wind"></div>
-        <div class="humidity"></div>
+        <div class="lan wind"></div>
+        <div class="lan humidity"></div>
       </div>
     </header>
     <main class="main">
@@ -74,16 +148,18 @@
       </div>
       <time class="time"></time>
       <date class="date"></date>
-      <div class="greeting-container">
-        <span class="greeting"></span>
+      <div class="greeting-container greetings">
+        <span class="lan greeting"></span>
         <input type="text" class="name" placeholder="[Enter name]" />
       </div>
     </main>
     <footer class="footer">
       <button class="change-quote"></button>
-      <div>
-        <div class="quote"></div>
-        <div class="author"></div>
+      <div class="quotes">
+        <div>
+          <div class="quote"></div>
+          <div class="author"></div>
+        </div>
       </div>
     </footer>
     <script src="js/script.js"></script>
@@ -91,5 +167,8 @@
     <script src="js/timeOfDay.js"></script>
     <script src="js/quote.js"></script>
     <script src="js/audio.js"></script>
+    <script src="js/lang.js"></script>
+    <script src="js/settings.js"></script>
+    <!-- <script src="js/translation.js"></script> -->
   </body>
 </html>
