@@ -3,6 +3,8 @@ const block = document.querySelector('.body');
 const Unsplash = document.querySelector('.Unsplash');
 const GitHub = document.querySelector('.GitHub');
 const Flickr = document.querySelector('.Flickr');
+const inputUnsplash = document.querySelector('.input-Unsplash');
+const inputFlickr = document.querySelector('.input-Flickr');
 let photoProviber = '';
 let timesOfDay = '';
 
@@ -25,19 +27,17 @@ function showGreeting() {
 getTimeOfDay();
 showGreeting();
 
-// save local Storage
-document.addEventListener('DOMContentLoaded', function () {
-  let input = document.querySelector('.name');
-
-  if (input) {
-    input.value = localStorage.getItem('name') || '';
-
-    input.addEventListener('input', function () {
-      localStorage.setItem('name', this.value);
-    });
-  }
-});
-
+// document.addEventListener('DOMContentLoaded', function () {
+//   if (inputUnsplash) {
+//     city = localStorage.getItem('input-Unsplash') || defualtCity;
+//     inputUnsplash.value = city;
+//     inputUnsplash.addEventListener('inputUnsplash', function () {
+//       localStorage.setItem('city', this.value);
+//     });
+//   }
+// });
+// let x = document.querySelector('.input-Unsplash').value;
+// console.log(x);
 // Github
 
 function getGitHub() {
