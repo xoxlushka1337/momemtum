@@ -67,6 +67,13 @@ function getGitHub() {
 getGitHub();
 GitHub.addEventListener('click', getGitHub);
 
+async function getPhotos(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return data;
+}
+
 // клик Unsplash
 Unsplash.addEventListener('click', function () {
   photoProviber = 'Unsplash';
@@ -74,25 +81,11 @@ Unsplash.addEventListener('click', function () {
   Unsplash.classList.add('settings-li-active');
   GitHub.classList.remove('settings-li-active');
   Flickr.classList.remove('settings-li-active');
-  const fectchPhotos = async () => {
-    const url = `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    states = data;
-    setPhotos();
-  };
-  // рандомное число
-  let Num = Math.floor(Math.random() * 20) + 1;
   const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
-  let states = [];
-
-  const img = new Image();
-
-  const setPhotos = () => {
-    block.style.backgroundImage = `url(${states.results[Num].urls.regular})`;
-  };
-  fectchPhotos();
+  let Num = Math.floor(Math.random() * 20) + 1;
+  getPhotos(
+    `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`,
+  ).then((photo) => (block.style.backgroundImage = `url(${photo.results[Num].urls.regular})`));
 });
 
 // клик Flickr
@@ -131,45 +124,45 @@ Flickr.addEventListener('click', function () {
 
 let getRandomNum = Math.floor(Math.random() * 20) + 1;
 function turnsNumber() {
+  let getRandomNum = Math.floor(Math.random() * 20) + 1;
   if (getRandomNum < 10) {
     getRandomNum = `0${getRandomNum}`;
   }
+}
+
+function getGitHubRandomNumber() {
+  let randomNum = Math.floor(Math.random() * 20) + 1;
+  if (randomNum < 10) {
+    randomNum = `0${randomNum}`;
+  }
+
+  return randomNum;
+}
+
+function changeBgImg(imageUrl) {
+  const img = new Image();
+  img.src = imageUrl;
+  img.onload = () => {
+    block.style.backgroundImage = `url(${imageUrl})`;
+  };
 }
 
 // левая  стрелочка
 const slidePrev = document.querySelector('.slide-prev');
 slidePrev.addEventListener('click', function getSlidePrev() {
   if (photoProviber === 'Unsplash') {
-    const fectchPhotos = async () => {
-      const url = `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`;
-      const response = await fetch(url);
-      const data = await response.json();
-
-      states = data;
-      setPhotos();
-    };
-    // рандомное число
-    let Num = Math.floor(Math.random() * 20) + 1;
     const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
-    let states = [];
-
-    const img = new Image();
-
-    const setPhotos = () => {
-      img.src = `${states.results[Num].urls.regular}`;
-      img.onload = () => {
-        block.style.backgroundImage = `url(${states.results[Num].urls.regular})`;
-      };
-    };
-    fectchPhotos();
+    getPhotos(
+      `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`,
+    ).then((photos) => {
+      let Num = Math.floor(Math.random() * 20) + 1;
+      let imageUrl = photos.results[Num].urls.regular;
+      changeBgImg(imageUrl);
+    });
   } else if (photoProviber === 'GitHub') {
-    const img = new Image();
-    function changeBgImg() {
-      img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg`;
-      img.onload = () => {
-        block.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${getRandomNum}.jpg')`;
-      };
-    }
+    let randomNum = getGitHubRandomNumber();
+    let imageUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timesOfDay}/${randomNum}.jpg`;
+    changeBgImg(imageUrl);
 
     turnsNumber();
     changeBgImg();
