@@ -8,7 +8,7 @@ async function getQuotes() {
 
   const res = await fetch(url);
   const data = await res.json();
-  let quoteIndex = Math.floor(Math.random() * 100);
+  let quoteIndex = Math.floor(Math.random() * 78);
 
   changeQuote.addEventListener('click', function () {
     if (quoteIndex === data.length) {
