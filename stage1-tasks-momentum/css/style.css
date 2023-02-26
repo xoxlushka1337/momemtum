@@ -179,8 +179,6 @@
   opacity: 1;
   visibility: visible;
   transition: visibility 0.5s, opacity 0.5s;
-  /* visibility: visible;
-  transition: 0.55s opacity, 0.55s visibility; */
 }
 .player-progress {
   background: #2b3c5b;
@@ -269,7 +267,7 @@ ul {
   margin-top: 20px;
   width: 40px;
   height: 40px;
-  background: url(/stage1-tasks-momentum/assets/img/settings.png);
+  background: url(../assets/img/settings.png);
   background-size: cover;
   background-position: center;
   filter: invert(1);
@@ -277,7 +275,7 @@ ul {
   cursor: pointer;
 }
 .settings-img:hover {
-  transform: rotate(360deg); /*поворачивается на 360 градусов вправо (если надо влево, то -360)*/
+  transform: rotate(360deg);
   transition: 3s;
 }
 .settings {
@@ -329,9 +327,7 @@ ul {
 .language-list {
   text-align: center;
 }
-/* .slider-list {
-  text-align: center;
-} */
+
 .li-API {
   display: flex;
   justify-content: space-between;
@@ -550,7 +546,6 @@ input:checked + .slider:before {
 
 .footer {
   display: flex;
-  /* justify-content: space-around; */
   width: 100%;
   height: 30vh;
   min-height: 160px;
@@ -560,7 +555,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 500px;
+  width: 700px;
   margin: 0 auto;
   position: relative;
 }
@@ -576,6 +571,7 @@ input:checked + .slider:before {
 
 .author {
   min-height: 20px;
+  margin-top: 10px;
   text-align: center;
 }
 .toDo_List {

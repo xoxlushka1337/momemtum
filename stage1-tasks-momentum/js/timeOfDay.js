@@ -10,8 +10,6 @@ let timesOfDay = '';
 let translatedGreeting = '';
 let gitHubIndexImg = Math.floor(Math.random() * 20) + 1;
 
-// установить язык по умолчанию
-// location.href = window.location.pathname + '#en';
 let hash = window.location.hash;
 let currentLanguage = hash.substring(1);
 const allLange = ['en', 'ru'];
@@ -116,7 +114,6 @@ function flickrApi() {
 
 Flickr.addEventListener('click', flickrApi);
 
-// let gitHubIndexImg = 2;
 function decreaseGitHubIndex() {
   if (gitHubIndexImg > 1) {
     gitHubIndexImg--;

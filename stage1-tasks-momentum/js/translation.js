@@ -44,11 +44,11 @@ function changeLanguaga() {
   const btnAdd = document.querySelector('.button-toDo_List');
   btnAdd.innerHTML = langArr['btnAdd'][currentLanguage];
 
-  // Приветствме
+  // Приветствие
   document.querySelector('.name').placeholder = langArr['name'][currentLanguage];
   translatedGreeting = langArr[timesOfDay][currentLanguage];
 
-  // Город по умолчанию, не сохроняем в localStorage
+  // Город по умолчанию, не сохраняем в localStorage
   if (localStorage.getItem('city') === 'Минск' || localStorage.getItem('city') === 'Minsk') {
     localStorage.removeItem('city');
   }

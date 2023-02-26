@@ -56,4 +56,3 @@ function setCity(event) {
 
 input.addEventListener('keypress', setCity);
 document.addEventListener('DOMContentLoaded', getWeather);
-// save local Storage

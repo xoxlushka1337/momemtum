@@ -56,23 +56,6 @@ playBtn.addEventListener('click', () => {
     playSong();
   }
 });
-// function x() {
-//   playList[songIndex].addEventListener('click', (e) => {
-//     const isPlaying = player.classList.contains('playing');
-//     if (isPlaying) {
-//       playList[songIndex].classList.remove('item-active');
-//       pauseSong();
-//     } else {
-//       playList[songIndex].classList.add('item-active');
-//       playSong();
-//     }
-//   });
-// }
-// x();
-// const hendleClick = (event) => {
-//   songIndex = playList[songIndex].indexOf(event.target);
-//   playList[songIndex].classList.add('item-active');
-// };
 
 List.forEach(function (li, i) {
   li.addEventListener('click', function () {
@@ -84,10 +67,6 @@ List.forEach(function (li, i) {
     } else {
       playSong();
     }
-    // if (!li == i) {
-    //   playList[songIndex].classList.remove('item-active');
-    // }
-    // playList[songIndex].classList.add('item-active');
   });
 });
 

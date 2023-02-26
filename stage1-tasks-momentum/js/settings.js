@@ -44,7 +44,6 @@ checkboxes.forEach(function (checkbox, checkboxIndex) {
       localStorage.setItem('block' + checkboxIndex, event.target.checked);
     }
   });
-  // localStorage.setItem('block' + checkboxIndex, event.target.checked);
 });
 
 // API
@@ -53,10 +52,8 @@ window.addEventListener('DOMContentLoaded', function () {
   if (provider === 'GitHub') {
     getGitHub();
   } else if (provider === 'Unsplash') {
-    // вызов unsplash api
     unsplashApi();
   } else if (provider === 'Flickr') {
-    // вызов flickr api
     flickrApi();
   }
 
@@ -64,7 +61,6 @@ window.addEventListener('DOMContentLoaded', function () {
     let value = localStorage.getItem('block' + i);
     if (value === 'false') {
       checkboxes[i].getElementsByTagName('input')[0].checked = false;
-      // console.log(checkboxes[i].getElementsByTagName('input')[0]);
       blocks[i].classList.add('display');
     }
   }
