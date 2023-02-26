@@ -11,7 +11,7 @@ async function getQuotes() {
   let quoteIndex = Math.floor(Math.random() * 78);
 
   changeQuote.addEventListener('click', function () {
-    if (quoteIndex === data.length) {
+    if (quoteIndex === 77) {
       quoteIndex = 0;
     } else {
       quoteIndex++;
