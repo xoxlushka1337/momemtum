@@ -40,12 +40,14 @@ function playSong() {
   playList[songIndex].classList.add('item-active');
   audio.play();
 }
+
 function pauseSong() {
   player.classList.remove('playing');
   playBtn.classList.remove('pause');
   playList[songIndex].classList.remove('item-active');
   audio.pause();
 }
+
 playBtn.addEventListener('click', () => {
   const isPlaying = player.classList.contains('playing');
   if (isPlaying) {

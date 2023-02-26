@@ -1,24 +1,62 @@
 const langArr = {
-  good: {
-    en: 'Good',
-    ru: 'Доброе',
-    ru2: 'Добрый',
-    ru3: 'Доброй',
-  },
   morning: {
-    en: 'morning',
-    ru: 'утро',
+    en: 'Good morning',
+    ru: 'Доброе утро',
   },
   afternoon: {
-    en: 'afternoon',
-    ru: 'день',
+    en: 'Good afternoon',
+    ru: 'Добрый день',
   },
   evening: {
-    en: 'evening',
-    ru: 'вечер',
+    en: 'Good evening',
+    ru: 'Добрый вечер',
   },
   night: {
-    en: 'night',
-    ru: 'ночи',
+    en: 'Good night',
+    ru: 'Доброй ночи',
+  },
+  name: {
+    en: '[Enter name]',
+    ru: '[Введите имя]',
+  },
+  windSpeed: {
+    en: 'Wind speed',
+    ru: 'Скорость ветра',
+  },
+  ms: {
+    en: 'm/s',
+    ru: 'м/с',
+  },
+  humidity: {
+    en: 'Humidity',
+    ru: 'Влажность',
+  },
+  defualtCity: {
+    en: 'Minsk',
+    ru: 'Минск',
+  },
+  settingsBlock: {
+    en: ['time', 'date', 'audios', 'weather', 'quotes', 'greetings'],
+    ru: ['время', 'дата', 'плеер', 'погода', 'цитаты', 'приветствие'],
+  },
+  languageTitle: {
+    en: 'Language',
+    ru: 'Языки',
+  },
+  sliderTitle: {
+    en: 'Photo slider',
+    ru: 'Фото слайдер',
+  },
+  lang: {
+    en: ['English', 'Russian'],
+    ru: ['Английский', 'Русский'],
+  },
+  toDoList: {
+    en: 'To-do list',
+    ru: 'Список дел',
+  },
+  btnAdd: {
+    en: 'Add',
+    ru: 'Добавить',
   },
 };

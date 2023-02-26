@@ -22,7 +22,10 @@ function showDate() {
     timeZone: 'UTC',
     weekday: 'long',
   };
-  const currentDate = date.toLocaleDateString('en-US', options);
+  const currentDate = date.toLocaleDateString(
+    `${currentLanguage}-${currentLanguage.toUpperCase()}`,
+    options,
+  );
   document.querySelector('.date').innerHTML = currentDate;
 }
 showDate();

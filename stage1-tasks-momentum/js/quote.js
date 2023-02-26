@@ -4,19 +4,11 @@ const changeQuote = document.querySelector('.change-quote');
 const select = document.querySelector('.lange');
 
 async function getQuotes() {
-  let url = './js/dataEn.json';
+  let url = `./js/data${currentLanguage}.json`;
 
-  // select.addEventListener('change', function () {
-  //   let lang = select.value;
-  //   if (lang === 'ru') {
-  //     url = './js/data.json';
-  //   }
-  // });
-
-  // select.addEventListener('change', change);
   const res = await fetch(url);
   const data = await res.json();
-  let quoteIndex = Math.floor(Math.random() * 100) + 1;
+  let quoteIndex = Math.floor(Math.random() * 100);
 
   changeQuote.addEventListener('click', function () {
     if (quoteIndex === data.length) {
@@ -32,4 +24,5 @@ async function getQuotes() {
 
   return data;
 }
+
 getQuotes();

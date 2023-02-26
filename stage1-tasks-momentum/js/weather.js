@@ -6,19 +6,19 @@ const wind = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
 const error = document.querySelector('.weather-error');
 let city = '';
-let defualtCity = 'Минск';
-document.addEventListener('DOMContentLoaded', function () {
-  if (input) {
-    city = localStorage.getItem('city') || defualtCity;
-    input.value = city;
-    input.addEventListener('input', function () {
-      localStorage.setItem('city', this.value);
-    });
-  }
+let defualtCity = langArr['defualtCity'][currentLanguage];
+
+input.addEventListener('input', function () {
+  city = this.value;
+  localStorage.setItem('city', this.value);
 });
 
 async function getWeather() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
+  city = localStorage.getItem('city') || defualtCity;
+  input.value = city;
+  localStorage.setItem('city', input.value);
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${currentLanguage}&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
   const res = await fetch(url).then((resp) => {
     if (!resp.ok) {
       error.textContent = 'Error! This city does not exist.';
@@ -36,10 +36,14 @@ async function getWeather() {
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
   temperature.textContent = `${data.main.temp.toFixed(0)}°C`;
   weatherDescription.textContent = data.weather[0].description;
-  wind.textContent = `Wind speed: ${data.wind.speed.toFixed(0)} m/s`;
-  humidity.textContent = `Humidity: ${data.main.humidity} %`;
+  wind.textContent = `${langArr['windSpeed'][currentLanguage]}: ${data.wind.speed.toFixed(0)} ${
+    langArr['ms'][currentLanguage]
+  }`;
+  humidity.textContent = `${langArr['humidity'][currentLanguage]}: ${data.main.humidity} %`;
+
   error.textContent = '';
 }
+
 function setCity(event) {
   if (event.code === 'Enter') {
     let value = input.value;

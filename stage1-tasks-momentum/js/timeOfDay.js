@@ -7,6 +7,18 @@ const inputUnsplash = document.querySelector('.input-Unsplash');
 const inputFlickr = document.querySelector('.input-Flickr');
 let photoProviber = '';
 let timesOfDay = '';
+let translatedGreeting = '';
+let gitHubIndexImg = Math.floor(Math.random() * 20) + 1;
+
+// установить язык по умолчанию
+// location.href = window.location.pathname + '#en';
+let hash = window.location.hash;
+let currentLanguage = hash.substring(1);
+const allLange = ['en', 'ru'];
+if (!allLange.includes(currentLanguage)) {
+  location.href = window.location.pathname + '#en';
+  location.reload();
+}
 
 // время суток
 function getTimeOfDay() {
@@ -20,25 +32,11 @@ function getTimeOfDay() {
 
 // приветствие
 function showGreeting() {
-  greeting.innerHTML = `Good ${timesOfDay}`;
+  greeting.innerHTML = translatedGreeting;
   getTimeOfDay();
   setTimeout(showGreeting, 1000);
 }
-getTimeOfDay();
 showGreeting();
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   if (inputUnsplash) {
-//     city = localStorage.getItem('input-Unsplash') || defualtCity;
-//     inputUnsplash.value = city;
-//     inputUnsplash.addEventListener('inputUnsplash', function () {
-//       localStorage.setItem('city', this.value);
-//     });
-//   }
-// });
-// let x = document.querySelector('.input-Unsplash').value;
-// console.log(x);
-// Github
 
 function getGitHub() {
   photoProviber = 'GitHub';
@@ -62,8 +60,17 @@ async function getPhotos(url) {
   return data;
 }
 
-// клик Unsplash
-Unsplash.addEventListener('click', function () {
+const tagInputUnsplash = document.querySelector('.input-Unsplash');
+let tagImgUnsplash = timesOfDay;
+tagInputUnsplash.addEventListener('keydown', function (e) {
+  if (e.keyCode === 13) {
+    tagImgUnsplash = this.value;
+    unsplashApi();
+  }
+});
+
+//Unsplash
+function unsplashApi() {
   photoProviber = 'Unsplash';
 
   Unsplash.classList.add('settings-li-active');
@@ -72,16 +79,27 @@ Unsplash.addEventListener('click', function () {
   const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
 
   getPhotos(
-    `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`,
+    `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${tagImgUnsplash}`,
   ).then((response) => {
-    let Num = Math.floor(Math.random() * 20) + 1;
+    let Num = Math.floor(Math.random() * 20);
     let imageUrl = response.results[Num].urls.regular;
     changeBgImg(imageUrl);
   });
+}
+
+Unsplash.addEventListener('click', unsplashApi);
+
+// Flickr
+const tagInputFlickr = document.querySelector('.input-Flickr');
+let tagImgFlickr = timesOfDay;
+tagInputFlickr.addEventListener('keydown', function (e) {
+  if (e.keyCode === 13) {
+    tagImgFlickr = this.value;
+    flickrApi();
+  }
 });
 
-// клик Flickr
-Flickr.addEventListener('click', function () {
+function flickrApi() {
   photoProviber = 'Flickr';
 
   Flickr.classList.add('settings-li-active');
@@ -89,14 +107,15 @@ Flickr.addEventListener('click', function () {
   Unsplash.classList.remove('settings-li-active');
 
   getPhotos(
-    `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`,
+    `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${tagImgFlickr}&per_page=100page=1&format=json&nojsoncallback=1`,
   ).then((response) => {
     let imageUrl = getRandomPhotoUrlFromFlickrResponse(response);
     changeBgImg(imageUrl);
   });
-});
+}
 
-let gitHubIndexImg = Math.floor(Math.random() * 20) + 1;
+Flickr.addEventListener('click', flickrApi);
+
 // let gitHubIndexImg = 2;
 function decreaseGitHubIndex() {
   if (gitHubIndexImg > 1) {
@@ -149,9 +168,9 @@ slidePrev.addEventListener('click', function getSlidePrev() {
   if (photoProviber === 'Unsplash') {
     const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
     getPhotos(
-      `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`,
+      `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${tagImgUnsplash}`,
     ).then((response) => {
-      let Num = Math.floor(Math.random() * 20) + 1;
+      let Num = Math.floor(Math.random() * 20);
       let imageUrl = response.results[Num].urls.regular;
       changeBgImg(imageUrl);
     });
@@ -162,7 +181,7 @@ slidePrev.addEventListener('click', function getSlidePrev() {
     changeBgImg(imageUrl);
   } else if ((photoProviber = 'Flickr')) {
     getPhotos(
-      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`,
+      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${tagImgFlickr}&per_page=100page=1&format=json&nojsoncallback=1`,
     ).then((response) => {
       let imageUrl = getRandomPhotoUrlFromFlickrResponse(response);
       changeBgImg(imageUrl);
@@ -176,9 +195,9 @@ slideNext.addEventListener('click', function getSlideNext(e) {
   if (photoProviber === 'Unsplash') {
     const client_ID = '-jgvteO7WrQN-mJ5ASfqZKa5oInlW1a9tHTJJI4OeNE';
     getPhotos(
-      `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${timesOfDay}`,
+      `https://api.unsplash.com/search/photos?client_id=${client_ID}&per_page=20&query=${tagImgUnsplash}`,
     ).then((response) => {
-      let Num = Math.floor(Math.random() * 20) + 1;
+      let Num = Math.floor(Math.random() * 20);
       let imageUrl = response.results[Num].urls.regular;
       changeBgImg(imageUrl);
     });
@@ -189,7 +208,7 @@ slideNext.addEventListener('click', function getSlideNext(e) {
     changeBgImg(imageUrl);
   } else if ((photoProviber = 'Flickr')) {
     getPhotos(
-      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${timesOfDay}&per_page=100page=1&format=json&nojsoncallback=1`,
+      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=68d29422af3bed1b8552ff77824dff4b&tags=${tagImgFlickr}&per_page=100page=1&format=json&nojsoncallback=1`,
     ).then((response) => {
       let imageUrl = getRandomPhotoUrlFromFlickrResponse(response);
       changeBgImg(imageUrl);

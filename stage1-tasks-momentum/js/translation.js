@@ -1,21 +1,59 @@
-const select = document.querySelector('.lange');
-const allLange = ['en', 'ru'];
-select.addEventListener('change', changeURL);
+const languages = document.querySelectorAll('.lang');
+
+languages.forEach((language) => {
+  if (language.classList.contains(currentLanguage)) {
+    language.classList.add('settings-li-active');
+  }
+
+  language.addEventListener('click', function (event) {
+    currentLanguage = event.target.classList[2];
+    changeURL();
+  });
+});
 
 function changeURL() {
-  let lang = select.value;
-  location.href = window.location.pathname + '#' + lang;
+  location.href = window.location.pathname + '#' + currentLanguage;
   location.reload();
 }
 
 function changeLanguaga() {
-  let hash = window.location.hash;
   hash = hash.substring(1);
-  if (!allLange.includes(hash)) {
-    location.href = window.location.pathname + '#en';
-    location.reload();
+
+  // названия блоков в настройках
+  const subtitles = document.querySelectorAll('.subtitle');
+  for (let i = 0; i < subtitles.length; i++) {
+    subtitles[i].innerHTML = langArr['settingsBlock'][currentLanguage][i];
   }
-  select.value = hash;
-  document.querySelector('.greeting').innerHTML = langArr['good'].hash;
+
+  // language
+  const languageTitle = document.querySelector('.title-Language');
+  languageTitle.innerHTML = langArr['languageTitle'][currentLanguage];
+
+  for (let i = 0; i < languages.length; i++) {
+    languages[i].innerHTML = langArr['lang'][currentLanguage][i];
+  }
+
+  //slider Title
+  const sliderTitle = document.querySelector('.title-slider');
+  sliderTitle.innerHTML = langArr['sliderTitle'][currentLanguage];
+
+  //To-do list
+  const titleToDoList = document.querySelector('.title-toDo_List');
+  titleToDoList.innerHTML = `— ${langArr['toDoList'][currentLanguage]} —`;
+
+  const btnAdd = document.querySelector('.button-toDo_List');
+  btnAdd.innerHTML = langArr['btnAdd'][currentLanguage];
+
+  // Приветствме
+  document.querySelector('.name').placeholder = langArr['name'][currentLanguage];
+  translatedGreeting = langArr[timesOfDay][currentLanguage];
+
+  // Город по умолчанию, не сохроняем в localStorage
+  if (localStorage.getItem('city') === 'Минск' || localStorage.getItem('city') === 'Minsk') {
+    localStorage.removeItem('city');
+  }
+  getQuotes();
+  getWeather();
 }
+
 changeLanguaga();

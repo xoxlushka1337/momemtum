@@ -107,18 +107,18 @@
             </div>
           </div>
           <div class="settings-language">
-            <div class="title">Language</div>
+            <div class="title title-Language">Language</div>
             <ul class="language-list">
-              <li class="li">English</li>
-              <li class="li">Russian</li>
+              <li class="li lang en">English</li>
+              <li class="li lang ru">Russian</li>
             </ul>
           </div>
           <div class="settings-slider">
-            <div class="title">Photo slider</div>
+            <div class="title title-slider">Photo slider</div>
             <ul class="slider-list">
-              <li class="li GitHub">GitHub</li>
+              <li class="li GitHub provider">GitHub</li>
               <div class="li-API">
-                <li class="li Unsplash">Unsplash</li>
+                <li class="li Unsplash provider">Unsplash</li>
                 <input
                   type="password text"
                   class="API-input input-Unsplash"
@@ -126,7 +126,7 @@
                 />
               </div>
               <div class="li-API">
-                <li class="li Flickr">Flickr</li>
+                <li class="li Flickr provider">Flickr</li>
                 <input
                   type="password text"
                   class="API-input input-Flickr"
@@ -137,8 +137,9 @@
           </div>
         </div>
       </div>
+
       <div class="weather">
-        <input type="password text" class="city" value="Минск" />
+        <input type="password text" class="city" />
         <i class="weather-icon owf"></i>
         <div class="weather-error"></div>
         <div class="description-container">
@@ -158,25 +159,38 @@
       <date class="date"></date>
       <div class="greeting-container greetings">
         <span class="lan greeting"></span>
-        <input type="text" class="name" placeholder="[Enter name]" />
+        <input type="text" class="name lan" placeholder="[Enter name]" />
       </div>
     </main>
     <footer class="footer">
-      <button class="change-quote"></button>
-      <div class="quotes">
-        <div>
-          <div class="quote"></div>
-          <div class="author"></div>
+      <div class="quote-blok">
+        <button class="change-quote"></button>
+        <div class="quotes">
+          <div>
+            <div class="quote"></div>
+            <div class="author"></div>
+          </div>
+        </div>
+      </div>
+      <div class="toDo_List">
+        <div class="title-toDo_List">— To-do list —</div>
+        <div class="conteiner-toDo_List">
+          <div class="conteiner-text-toDo_List"></div>
+          <div class="enter-toDo_List">
+            <input class="input-toDo_List" type="text" />
+            <button class="button-toDo_List">Add</button>
+          </div>
         </div>
       </div>
     </footer>
-    <script src="js/script.js"></script>
-    <script src="js/weather.js"></script>
     <script src="js/timeOfDay.js"></script>
     <script src="js/quote.js"></script>
-    <script src="js/audio.js"></script>
     <script src="js/lang.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/audio.js"></script>
     <script src="js/settings.js"></script>
-    <!-- <script src="js/translation.js"></script> -->
+    <script src="js/toDoList.js"></script>
   </body>
 </html>
