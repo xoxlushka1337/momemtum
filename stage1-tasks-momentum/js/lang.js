@@ -36,8 +36,8 @@ const langArr = {
     ru: 'Минск',
   },
   settingsBlock: {
-    en: ['time', 'date', 'audios', 'weather', 'quotes', 'greetings'],
-    ru: ['время', 'дата', 'плеер', 'погода', 'цитаты', 'приветствие'],
+    en: ['time', 'date', 'audios', 'weather', 'quotes', 'greetings', 'to-do list'],
+    ru: ['время', 'дата', 'плеер', 'погода', 'цитаты', 'приветствие', 'список дел'],
   },
   languageTitle: {
     en: 'Language',

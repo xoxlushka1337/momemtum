@@ -7,7 +7,8 @@ const greetings = document.querySelector('.greetings');
 const imgs = document.querySelector('.settings-img');
 const settings = document.querySelector('.settings');
 const checkboxes = document.querySelectorAll('.switch');
-const blocks = [time, date, audios, weather, quotes, greetings];
+const todoList = document.querySelector('.toDo_List');
+const blocks = [time, date, audios, weather, quotes, greetings, todoList];
 
 // providers = [GitHub, Unsplash, Flickr];
 let providers = document.querySelectorAll('.provider');
