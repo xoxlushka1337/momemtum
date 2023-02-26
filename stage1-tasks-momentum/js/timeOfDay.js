@@ -36,6 +36,13 @@ function showGreeting() {
 }
 showGreeting();
 
+const inputName = document.querySelector('.name');
+
+inputName.addEventListener('input', function () {
+  localStorage.setItem('name', inputName.value);
+});
+inputName.value = localStorage.getItem('name') || '';
+
 function getGitHub() {
   photoProviber = 'GitHub';
 
